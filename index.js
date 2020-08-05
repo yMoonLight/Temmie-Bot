@@ -22,7 +22,7 @@ const fs = require("fs");
 bot.fs = fs;
 //bot.mathjs = require("mathjs");
 
-bot.prefixo = 't!';
+bot.prefixo = 't';
 
 /*  Carrega os códigos dos módulos: comandos e sistemas  */
 bot.pastas = {}; //vai associar um comando a uma paste
