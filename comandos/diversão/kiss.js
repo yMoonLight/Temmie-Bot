@@ -3,9 +3,15 @@ const Discord = require('discord.js');
 exports.run = async (client, message, args) => {
 
 var list = [
-  'https://imgur.com/iclUiUN.gif',
-  'https://imgur.com/lYQt9rx.gif',
-  'https://imgur.com/w1TU5mR.gif'
+  'https://loritta.website/assets/img/actions/kiss/both/gif_283.gif',
+  'https://loritta.website/assets/img/actions/kiss/male_x_male/gif_321.gif',
+  'https://loritta.website/assets/img/actions/kiss/female_x_male/gif_379.gif',
+  'https://loritta.website/assets/img/actions/kiss/female_x_female/gif_333.gif',
+  'https://loritta.website/assets/img/actions/kiss/male_x_male/gif_306.gif',
+  'https://loritta.website/assets/img/actions/kiss/female_x_female/gif_337.gif',
+  'https://loritta.website/assets/img/actions/kiss/female_x_female/gif_350.gif',
+  'https://loritta.website/assets/img/actions/kiss/both/gif_287.gif',
+  'https://loritta.website/assets/img/actions/kiss/male_x_female/gif_299.gif',
 ];
 
 var rand = list[Math.floor(Math.random() * list.length)];

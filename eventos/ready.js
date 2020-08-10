@@ -32,6 +32,6 @@ module.exports = async (bot) => { //faz algo qdo o bot liga
    setInterval(async () => {
     let c = Math.floor(Math.random() * avatares.length + 1) - 1
       await bot.user.setAvatar(avatares[c])
-  }, 4000)
+  }, 400000)
 
 }
