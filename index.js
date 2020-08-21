@@ -15,6 +15,7 @@ const moment = require('moment');
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 bot.Discord = Discord;
+bot.Database = require('./database.js')
 
 
 //const Enmap = require("enmap");

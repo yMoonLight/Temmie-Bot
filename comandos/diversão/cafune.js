@@ -32,7 +32,6 @@ let avatar = message.author.displayAvatarURL({format: 'png'});
         .setImage(rand)
         .setTimestamp()
         .setThumbnail(avatar)
-        .setFooter('Clique em 🔁 para retribuir!')
         .setAuthor(message.author.tag, avatar);
-  await message.channel.send(embed);
+        await message.channel.send(embed);
 }

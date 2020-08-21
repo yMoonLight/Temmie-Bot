@@ -1,27 +1,30 @@
-const Discord = require("discord.js");
- 
-exports.run = (bot, message, args) => {
- 
-    if (!message.member.hasPermission("ADMINISTRATOR")) return message.reply(`sem permissao`)
- 
-    let membro = message.mentions.users.first()
-    if (!membro) return message.reply(`mencione um membro`)
- 
-    let motivo = args.slice(1).join(" ");
-    if (!motivo) return message.reply(`escreva um motivo`)
- 
-    let embed = new Discord.MessageEmbed()
- 
-    .setTitle(`WARN - ${membro.username}`)
-    .setColor('RED')
-    .setFooter(`Staff responsavel: ${message.author.username}`, message.author.avatarURL)
-    .setDescription(motivo)
- 
-    membro.send(embed)
-    message.channel.send(`:thinking: - Finalizei esse comando com sucesso!`)
- 
+const Discord = require('discord.js');
+const fs = require("fs");
+
+exports.run = (client, message, args) => {
+  if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("Você não tem permissão pra isso!");
+  let reason = args.slice(1).join(' ');
+  let user = message.mentions.users.first();
+  if (message.mentions.users.size < 1) return message.reply('Você deve mencionar alguém para dar warn.');
+  if (reason.length < 1) return message.reply('Você precisa dar uma razão para um warn.');
+
+  let dmsEmbed = new Discord.MessageEmbed()
+  .setTitle("Warn")
+  .setColor("RANDOM")
+  .setTimestamp(`${message.createdAt}`)
+  .setFooter(`Comando solicitado por ${message.member.displayName}`, message.author.displayAvatarURL({Size: 32}))
+  .setDescription(`Você levou warn no server \`${message.guild.name}\``)
+  .addField("Avisado por", message.author.tag)
+  .addField("Motivo", reason);
+
+  message.channel.send(dmsEmbed);
+
+  message.delete();
+  message.channel.send('<@'+user.id+'>')
+  message.guild.channels.cache.get('713544537200394250').send(dmsEmbed)
+
 }
- 
+
 exports.help = {
-    name: 'warn'
-}
+  name: 'warn'
+};
