@@ -1,34 +1,43 @@
-  
-const { Command, SwitchbladeEmbed, Constants } = require('../../')
+const Discord = require("discord.js");
+const db = require("quick.db");
+let ms = require("parse-ms");
 
-module.exports = class Daily extends Command {
-  constructor (client) {
-    super({
-      name: 'daily',
-      category: 'economy',
-      requirements: { databaseOnly: true }
-    }, client)
-  }
+exports.run = async (client, message, args) => {
+    let pad_zero = num => (num < 10 ? '0' : '') + num;
+    let cooldown = 8.64e+7; // 24 Hours in ms.
+    let amount = 500; // How much user will get it in their dailies.
 
-  async run ({ t, author, channel }) {
-    const embed = new SwitchbladeEmbed(author)
-    channel.startTyping()
+    let lastDaily = await db.get(`lastDaily.${message.author.id}`);
+    let buck = await db.get(`account.${message.author.id}.balance`);
 
     try {
-      const { collectedMoney } = await this.client.controllers.economy.bonus.claimDaily(author.id)
-      embed.setDescription(t('commands:daily.claimedSuccessfully', { count: collectedMoney }))
-    } catch (e) {
-      embed.setColor(Constants.ERROR_COLOR)
-      switch (e.message) {
-        case 'ALREADY_CLAIMED':
-          embed.setTitle(t('commands:daily.alreadyClaimedTitle'))
-            .setDescription(t('commands:daily.alreadyClaimedDescription', { time: e.formattedCooldown }))
-          break
-        default:
-          embed.setTitle(t('errors:generic'))
-      }
-    }
+        
+        if (lastDaily !== null && cooldown - (Date.now() - lastDaily) > 0) {
+            let timeObj = ms(cooldown - (Date.now() - lastDaily));
 
-    channel.send(embed).then(() => channel.stopTyping())
-  }
+            let hours = pad_zero(timeObj.hours).padStart(2, "0"),
+                mins = pad_zero(timeObj.minutes).padStart(2, "0"),
+                secs = pad_zero(timeObj.seconds).padStart(2, "0");
+
+            let finalTime = `**${hours}:${mins}:${secs}**`;
+            return message.channel.send(`<a:uncheck:748188800433258586> | Você não pode coletar seu daily agora! Por favor espere: ${finalTime}.`);
+        } else {
+            db.set(`lastDaily.${message.author.id}`, Date.now());
+            db.add(`account.${message.author.id}.balance`, amount);
+            return message.channel.send(`**${message.author.tag}!** <a:a_:747921925824708679> | Você recebeu 500 TemiCoins! `);
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.help = {
+    name: "daily",
+    description: "Collect the daily credits."
+}
+
+exports.conf = {
+    aliases: ["dailies"],
+    cooldown: 10
 }

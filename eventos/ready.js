@@ -17,7 +17,9 @@ module.exports = async (bot) => { //faz algo qdo o bot liga
      ["h0i so temi", "LISTENING"],
      ["do ladu o amigu! Oi, sou bob", "PLAYING"],
      ["ve a amiga Hoi so temi", "WATCHING"],
-     ["não esquece a amiga Hoi so temi", "WATCHING"]//bot adicionar quantos quiser :V
+     ["não esquece a amiga Hoi so temi", "WATCHING"],
+     ["O MonLight", "STREAMING"]
+     //bot adicionar quantos quiser :V
     ];
   setInterval(async () => { // controlar o intervalo
     let i = Math.floor(Math.random() * atividades.length + 1) - 1

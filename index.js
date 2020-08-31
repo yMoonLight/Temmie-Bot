@@ -90,7 +90,6 @@ try{//faz a leitura dos eventos relativos a API discord.js
 }
 console.log(logcrr +"carregados.");
 
-
 try{
   console.log("-Tentando logar na API do discord");
   bot.login(process.env.TOKEN);//faz login na API do discord com a credencial do bot

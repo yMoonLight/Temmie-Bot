@@ -7,8 +7,8 @@ module.exports.run = async (bot, message, args) => {
       .setTimestamp()
          .setTitle("Comando de ban")
       .addField("Descrição:", `Bane um membro`, true)
-     .addField("Uso:", `t!ban [usuário] [motivo]`, true)
-    .addField("Exemplo:", `t!ban @yMoonLight spam`)
+     .addField("Uso:", `tban [usuário] [motivo]`, true)
+    .addField("Exemplo:", `tban @yMoonLight spam`)
   
   if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("Você não tem permissão para fazer isso!");
   

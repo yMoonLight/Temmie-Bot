@@ -11,7 +11,7 @@ exports.run = async (client, message, args) => {
     }});
 
     message.delete();
-    message.channel.send('||<@&713357035655266354>||')
+    message.channel.send('||@here||')
     message.channel.send({embed: {
         title: args.join(' '),
         footer: {

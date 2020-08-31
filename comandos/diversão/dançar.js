@@ -22,7 +22,7 @@ let avatar = message.author.displayAvatarURL({format: 'png'});
   const embed = new Discord.MessageEmbed()
         .setTitle('Dançar')
         .setColor('#000000')
-        .setDescription(`${message.author} **Dançou com** ${user}`)
+        .setDescription(`<a:dance:748180889128796221> | ${message.author} **Dançou com** ${user} | <a:dance:748180889128796221>`)
         .setImage(rand)
         .setTimestamp()
         .setThumbnail(avatar)
